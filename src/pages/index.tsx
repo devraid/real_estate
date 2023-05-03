@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import FormsSignInRegister from '@/components/Forms/FormSignInRegister'
+import FormsSignInRegister from '@/components/Forms/SignInRegister'
 
 const inter = Inter({ subsets: ['latin'] })
 

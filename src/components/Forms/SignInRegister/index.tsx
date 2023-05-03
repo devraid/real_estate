@@ -1,8 +1,12 @@
+import UIModalWrapper from '@/components/UI/Modals/Wrapper'
+
 const FormSignInRegister = () => {
     return (
-        <div className="container flex flex-1 min-h-full mx-auto px-5 bg-white">
+      <div className="form-signin-register">
+        <UIModalWrapper>
           new form
-        </div>
+        </UIModalWrapper>
+      </div>
     )
   }
   
