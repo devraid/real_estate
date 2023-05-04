@@ -18,61 +18,32 @@ const FormSignInRegister = () => {
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'signin_email':
-        if (!emailFormat.test(e.target.value.trim())) {
-          setErrorSignInEmail('Invalid Email')
-        } else {
-          setErrorSignInEmail('')
-        }
+        setErrorSignInEmail(emailFormat.test(e.target.value.trim()) ? '' : 'Invalid Email')
         break
       case 'signin_password':
-        if (!e.target.value.trim()) {
-          setErrorSignInPassword('Invalid Password')
-        } else {
-          setErrorSignInPassword('')
-        }
+        setErrorSignInPassword(e.target.value.trim() ? '' : 'Invalid Password')
         break
       case 'register_email':
-        if (!emailFormat.test(e.target.value.trim())) {
-          setErrorRegisterEmail('Invalid Email')
-        } else {
-          setErrorRegisterEmail('')
-        }
+        setErrorRegisterEmail(emailFormat.test(e.target.value.trim()) ? '' : 'Invalid Email')
         break
       case 'register_first_name':
-        if (!e.target.value.trim()) {
-          setErrorRegisterFirstName('Invalid First Name')
-        } else {
-          setErrorRegisterFirstName('')
-        }
+        setErrorRegisterFirstName(e.target.value.trim() ? '' : 'Invalid First Name')
         break
       case 'register_last_name':
-        if (!e.target.value.trim()) {
-          setErrorRegisterLastName('Invalid Last Name')
-        } else {
-          setErrorRegisterLastName('')
-        }
+        setErrorRegisterLastName(e.target.value.trim() ? '' : 'Invalid Last Name')
         break
       case 'register_password':
-        if (!e.target.value.trim()) {
-          setErrorRegisterPassword('Invalid Password')
-        } else {
-          setErrorRegisterPassword('')
-        }
-        if (
-          registerRepeatPassword.current?.value.trim() !== e.target.value.trim() &&
-          registerRepeatPassword.current?.value.trim()
-        ) {
-          setErrorRegisterRepeatPassword("Passwords don't match")
-        }
+        setErrorRegisterPassword(e.target.value.trim() ? '' : 'Invalid Password')
         break
       case 'register_repeat_password':
-        if (!e.target.value.trim()) {
-          setErrorRegisterRepeatPassword('Invalid Password')
-        } else if (registerPassword.current?.value.trim() !== e.target.value.trim()) {
-          setErrorRegisterRepeatPassword("Passwords don't match")
-        } else {
-          setErrorRegisterRepeatPassword('')
-        }
+        setErrorRegisterRepeatPassword(
+          e.target.value.trim()
+            ? registerPassword.current?.value.trim() !== e.target.value.trim() &&
+              registerRepeatPassword.current?.value.trim()
+              ? "Passwords don't match"
+              : ''
+            : 'Invalid Password'
+        )
         break
     }
   }
