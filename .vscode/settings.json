@@ -1,9 +1,12 @@
 {
   "editor.codeActionsOnSave": {
+    "source.fixAll": true,
     "source.fixAll.eslint": true
   },
   "[javascriptreact,typescript,typescriptreact]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 }

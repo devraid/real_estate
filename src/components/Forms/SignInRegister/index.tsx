@@ -4,6 +4,8 @@ import { useState, ChangeEvent, createRef } from 'react'
 const FormSignInRegister = () => {
   const registerPassword = createRef<HTMLInputElement>()
   const registerRepeatPassword = createRef<HTMLInputElement>()
+  const [errorSignInEmail, setErrorSignInEmail] = useState<string>('')
+  const [errorSignInPassword, setErrorSignInPassword] = useState<string>('')
   const [errorRegisterEmail, setErrorRegisterEmail] = useState<string>('')
   const [errorRegisterFirstName, setErrorRegisterFirstName] = useState<string>('')
   const [errorRegisterLastName, setErrorRegisterLastName] = useState<string>('')
@@ -15,6 +17,20 @@ const FormSignInRegister = () => {
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
+      case 'signin_email':
+        if (!emailFormat.test(e.target.value.trim())) {
+          setErrorSignInEmail('Invalid Email')
+        } else {
+          setErrorSignInEmail('')
+        }
+        break
+      case 'signin_password':
+        if (!e.target.value.trim()) {
+          setErrorSignInPassword('Invalid Password')
+        } else {
+          setErrorSignInPassword('')
+        }
+        break
       case 'register_email':
         if (!emailFormat.test(e.target.value.trim())) {
           setErrorRegisterEmail('Invalid Email')
@@ -64,6 +80,48 @@ const FormSignInRegister = () => {
   return (
     <div className="form-signin-register">
       <UIModalWrapper>
+        <div
+          v-if="restPassword === 0"
+          className="signin flex-1 pb-5 md:pb-0 md:pr-10 max-md:border-b md:border-r border-solid border-gray-3"
+        >
+          <h4 className="font-avenir-next-heavy text-xl mb-3">Sign In</h4>
+          <input
+            className="font-avenir-next-book text-sm md:text-base text-gray w-full px-2 py-1 md:px-3 md:py-2 appearance-none outline-none border-solid border border-gray-3 focus:border-gray-5  transition-colors"
+            type="text"
+            name="signin_email"
+            maxLength={100}
+            spellCheck="false"
+            placeholder="Email"
+            autoComplete="email"
+            onBlur={(e) => handleInput(e)}
+            onChange={(e) => handleInput(e)}
+          />
+          <div className="error mb-3">
+            {errorSignInEmail && (
+              <span className="inline-block w-full mt-1 font-avenir-next-book text-sm text-gray text-red-500">
+                {errorSignInEmail}
+              </span>
+            )}
+          </div>
+          <input
+            className="font-avenir-next-book text-sm md:text-base text-gray w-full px-2 py-1 md:px-3 md:py-2 appearance-none outline-none border-solid border border-gray-3 focus:border-gray-5  transition-colors"
+            type="password"
+            name="signin_password"
+            maxLength={50}
+            spellCheck="false"
+            placeholder="Password"
+            autoComplete="current-password"
+            onBlur={(e) => handleInput(e)}
+            onChange={(e) => handleInput(e)}
+          />
+          <div className="error mb-3">
+            {errorSignInPassword && (
+              <span className="inline-block w-full mt-1 font-avenir-next-book text-sm text-gray text-red-500">
+                {errorSignInPassword}
+              </span>
+            )}
+          </div>
+        </div>
         <div className="register flex-1 pt-5 md:pt-0 md:pl-10">
           <h4 className="font-avenir-next-heavy text-xl mb-3">Register</h4>
           <input
@@ -175,9 +233,7 @@ const FormSignInRegister = () => {
             <span
               v-if="v$.register_terms_conditions.$error"
               className="inline-block w-full mt-1 font-avenir-next-book text-sm text-gray text-red-500"
-            >
-              test
-            </span>
+            ></span>
           </div>
           <a
             role="button"

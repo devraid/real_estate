@@ -1,8 +1,10 @@
-type Props = {
-  children: string | JSX.Element | JSX.Element[]
-}
+import { ReactNode } from "react"
 
-const UIModalWrapper = ({ children }: Props) => {
+type UIModalWrapperProps = {
+  children: ReactNode;
+};
+
+const UIModalWrapper = ({ children }: UIModalWrapperProps) => {
   return (
     <div className="ui-modal-wrapper flex justify-center md:items-center w-screen h-screen fixed top-0 left-0 p-5 bg-[rgba(255,255,255,0.1)] overflow-y-auto">
       <div className="flex flex-col md:flex-row relative m-0 p-5 md:p-10 w-full h-fit max-w-screen-sm lg:max-w-screen-md bg-white border border-solid border-gray-5 shadow-[2px_2px_6px_rgba(0,0,0,0.1)] rounded-lg">
@@ -18,3 +20,4 @@ const UIModalWrapper = ({ children }: Props) => {
 }
 
 export default UIModalWrapper
+
